@@ -31,16 +31,19 @@ public class App {
      * second argument defaults to "1".
      */
     public static void main(String... args) {
+        // TOOD template/vscode has an issue parsing these args into an array of strings, so split input explicitly
+        String[] parsedArgs = args[0].split(" ");
+
         int year = defaultYear();
         int day = defaultDay();
 
-        if (args.length != 0) {
-            day = intOrDie(args[0]);
+        if (parsedArgs.length != 0) {
+            day = intOrDie(parsedArgs[0]);
         }
 
         int part = 1;
-        if (args.length > 1) {
-            part = intOrDie(args[1]);
+        if (parsedArgs.length > 1) {
+            part = intOrDie(parsedArgs[1]);
         }
 
         String input = readInput(year, day);
