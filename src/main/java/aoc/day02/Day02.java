@@ -1,5 +1,6 @@
 package aoc.day02;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import aoc.Day;
@@ -56,7 +57,29 @@ public class Day02 implements Day {
 
     @Override
     public String part2(String input) {
-        return "";
+        List<String> lines = Utils.splitLines(input);
+    
+        int safeCount = 0;
+
+        for (String line : lines) {
+            List<Integer> levels = Utils.parseLineToInts(line, " ");
+
+            // call safe check on normal input and then, if needed, n sublists with each element excluded
+            if (isSafe(levels)) {
+                ++safeCount;
+            } else {
+                for (int i = 0; i < levels.size(); ++i) {
+                    List<Integer> levelsCopy = new ArrayList<>(levels);
+                    levelsCopy.remove(i);
+                    if (isSafe(levelsCopy)) {
+                        ++safeCount;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return String.valueOf(safeCount);
     }
 
 }
