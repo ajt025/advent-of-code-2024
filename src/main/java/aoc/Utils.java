@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,17 @@ public class Utils {
     
     public static List<String> splitLines(String input) {
         return Arrays.asList(input.split(System.lineSeparator()));
+    }
+
+    public static List<Integer> parseLineToInts(String input, String separator) {
+        String[] elements = input.split(separator);
+
+        List<Integer> results = new ArrayList<>();
+        for (String item : elements) {
+            results.add(Integer.parseInt(item));
+        }
+
+        return results;
     }
 
 }
