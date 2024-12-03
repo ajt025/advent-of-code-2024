@@ -1,4 +1,4 @@
-package aoc;
+package aoc.shared;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -17,11 +17,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class Utils {
-    
+
+    public static final String DIGIT_REGEX = "\\d+";
+    public static final Pattern DIGIT = Pattern.compile(DIGIT_REGEX);
+
     public static List<String> splitLines(String input) {
         return Arrays.asList(input.split(System.lineSeparator()));
     }

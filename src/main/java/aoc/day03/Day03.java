@@ -6,16 +6,15 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import aoc.Day;
+import aoc.shared.Patterns;
 
 public class Day03 implements Day {
 
     public static final String INSTRUCTION_REGEX = "mul\\(\\d+,\\d+\\)";
     public static final String ENABLE_REGEX = "do\\(\\)";
     public static final String DISABLE_REGEX = "don't\\(\\)";
-    public static final String DIGIT_REGEX = "\\d+";
 
     public static final Pattern INSTRUCTION = Pattern.compile(INSTRUCTION_REGEX);
-    public static final Pattern DIGIT = Pattern.compile(DIGIT_REGEX);
 
     @Override
     public String part1(String input) {
@@ -25,7 +24,7 @@ public class Day03 implements Day {
                     .map(match -> match.group())
                     // from each instruction, multiply the values
                     .map(match -> {
-                        Matcher digitFinder = DIGIT.matcher(match);
+                        Matcher digitFinder = Patterns.DIGIT.matcher(match);
                         return digitFinder.results().mapToInt(i -> Integer.parseInt(i.group())).reduce(1, (a, b) -> a * b);
                     })
                     // add products to the running sum
@@ -57,7 +56,7 @@ public class Day03 implements Day {
                     continue;
                 }
 
-                Matcher factors = DIGIT.matcher(match);
+                Matcher factors = Patterns.DIGIT.matcher(match);
                 runningSum += factors.results()
                                         .mapToInt(i -> Integer.parseInt(i.group()))
                                         .reduce(1, (a, b) -> a * b);

@@ -1,7 +1,7 @@
 package aoc.day01;
 
 import aoc.Day;
-import aoc.Utils;
+import aoc.shared.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;

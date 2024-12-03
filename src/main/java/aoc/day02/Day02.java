@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import aoc.Day;
-import aoc.Utils;
+import aoc.shared.Utils;
 
 public class Day02 implements Day {
 
