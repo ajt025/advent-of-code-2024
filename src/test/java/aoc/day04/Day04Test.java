@@ -30,12 +30,21 @@ public class Day04Test {
     @Test
     public void testPart2(){
         // Given
-        String input =  "";
+        String input =  ".M.S......\n" + //
+                        "..A..MSMS.\n" + //
+                        ".M.S.MAA..\n" + //
+                        "..A.ASMSM.\n" + //
+                        ".M.S.M....\n" + //
+                        "..........\n" + //
+                        "S.S.S.S.S.\n" + //
+                        ".A.A.A.A..\n" + //
+                        "M.M.M.M.M.\n" + //
+                        "..........";
 
         // When
         String result = new Day04().part2(input);
 
         // Then
-        assertEquals("not implmented", result);
+        assertEquals("9", result);
     }
 }

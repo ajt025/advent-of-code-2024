@@ -18,6 +18,13 @@ public class Day04 implements Day {
         {1, 1},     // bottom right
     };
 
+    int[][] DIAGONAL_DIRECTIONS = {
+        {-1, -1},   // top left
+        {1, 1},     // bottom right
+        {1, -1},    // top right
+        {-1, 1},    // bottom left
+    };
+
     public char[][] buildBoard(String input) {
         // build the board
         List<String> lines = Utils.splitLines(input);
@@ -77,7 +84,54 @@ public class Day04 implements Day {
 
     @Override
     public String part2(String input) {
-        return "";
+        char[][] board = buildBoard(input);
+
+        int runningSum = 0;
+        for (int i = 0; i < board.length; ++i) {
+            for (int j = 0; j < board[i].length; ++j) {
+                // 'A' acts as the origin for each X-MAS cross
+                if (board[i][j] == 'A') {
+                    runningSum += findXmas(board, i, j);
+                }
+            }
+        }
+
+        return String.valueOf(runningSum);
+    }
+
+    public int findXmas(char[][] board, int i, int j) {
+        int mCount = 0;
+        int sCount = 0;
+
+        for (int[] direction : DIAGONAL_DIRECTIONS) {
+            int nextI = i + direction[0];
+            int nextJ = j + direction[1];
+            // current cell is impossible for X-MAS to exist due to boundary
+            if (nextI < 0 || nextJ < 0 || nextI >= board.length || nextJ >= board[i].length) {
+                break;
+            }
+            
+            // count number of letters to see if forming X-MAS is even possible
+            char currLetter = board[nextI][nextJ];
+            if (currLetter == 'M') ++mCount;
+            if (currLetter == 'S') ++sCount;
+        }
+
+        // check letter counts and one diagonal bc X-MAS must be formed with 2 M's and 2 S's
+        // the diagonal check is to ensure a diagonal isn't spelling MAM/SAS. if one diagonal is valid, the other must be as well
+        if (mCount == 2 && sCount == 2 && isDiagonalDifferent(board, i, j)) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    // Check top left and bottom right cells and return if they're different
+    private boolean isDiagonalDifferent(char[][] board, int i, int j) {
+        int[] topLeft = {i + DIAGONAL_DIRECTIONS[0][0], j + DIAGONAL_DIRECTIONS[0][1]};
+        int[] bottomRight = {i + DIAGONAL_DIRECTIONS[1][0], j + DIAGONAL_DIRECTIONS[1][1]};
+
+        return board[topLeft[0]][topLeft[1]] != board[bottomRight[0]][bottomRight[1]];
     }
 
 }
