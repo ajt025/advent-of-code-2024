@@ -16,6 +16,9 @@ repositories {
 }
 
 dependencies {
+    // Set Utils
+    implementation("com.google.guava:guava:33.3.1-jre")
+
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
 
