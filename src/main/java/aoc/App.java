@@ -56,7 +56,7 @@ public class App {
             result = dayInstance.part2(input);
         }
 
-        System.out.println(result);
+        System.out.println("Result: " + result);
     }
 
     /**
