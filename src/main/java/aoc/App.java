@@ -290,7 +290,7 @@ public class App {
     /**
      * Uses "Reflection" (Java metaprogramming) to get an instance of the class for the given day.
      *
-     * Specifically, if you pass "1" it will return an instance of {@code aoc.day01.Day01}.
+     * Specifically, if you pass "1" it will return an instance of {@code aoc.problem.day01.Day01}.
      *
      * If there is no Day class for the given day, the JVM will exit.
      *
@@ -298,7 +298,7 @@ public class App {
      * @return An instance of the Day implementation for the given day (e.g. Day01.class for day = 1)
      */
     private static Day getDayInstance(int day) {
-        String dayClassName = String.format("aoc.day%02d.Day%02d", day, day);
+        String dayClassName = String.format("aoc.problem.day%02d.Day%02d", day, day);
         try {
             Class<?> dayClass = Class.forName(dayClassName);
             if (!Day.class.isAssignableFrom(dayClass)) {

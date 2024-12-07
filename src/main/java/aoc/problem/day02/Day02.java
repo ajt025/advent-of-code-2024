@@ -1,4 +1,4 @@
-package aoc.day02;
+package aoc.problem.day02;
 
 import java.util.ArrayList;
 import java.util.List;

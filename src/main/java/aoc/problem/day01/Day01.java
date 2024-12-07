@@ -1,4 +1,4 @@
-package aoc.day01;
+package aoc.problem.day01;
 
 import aoc.Day;
 import aoc.shared.Utils;

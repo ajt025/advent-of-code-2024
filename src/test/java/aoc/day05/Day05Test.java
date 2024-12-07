@@ -1,6 +1,7 @@
 package aoc.day05;
 
 
+import aoc.problem.day05.Day05;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

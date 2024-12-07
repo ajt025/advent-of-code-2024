@@ -1,4 +1,4 @@
-package aoc.day04;
+package aoc.problem.day04;
 
 import java.util.List;
 

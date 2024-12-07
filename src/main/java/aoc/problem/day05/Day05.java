@@ -1,4 +1,4 @@
-package aoc.day05;
+package aoc.problem.day05;
 
 import java.util.HashMap;
 import java.util.HashSet;

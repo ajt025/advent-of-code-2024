@@ -1,4 +1,4 @@
-package aoc.day03;
+package aoc.problem.day03;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
