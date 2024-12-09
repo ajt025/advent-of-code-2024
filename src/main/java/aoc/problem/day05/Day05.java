@@ -1,10 +1,6 @@
 package aoc.problem.day05;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.MatchResult;
 import java.util.stream.Collectors;
 
@@ -95,7 +91,50 @@ public class Day05 implements Day {
 
     @Override
     public String part2(String input) {
+        List<String> lines = Utils.splitLines(input);
 
-        return String.valueOf("");
+        List<String> rulesRaw = lines.subList(0, lines.indexOf(""));
+        List<String> updates = lines.subList(lines.indexOf("") + 1, lines.size());
+
+        // build rules mapping int -> list<int>
+        Map<Integer, Set<Integer>> rules = buildRulesMapping(rulesRaw);
+
+        int runningSum = 0;
+        for (String update : updates) {
+            List<Integer> pageNumbers = Patterns.DIGIT.matcher(update).results()
+                    .map(MatchResult::group)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+            // BR: add middle element to running sum if matches our criteria
+            if (!isPageSequenceValid(rules, pageNumbers)) {
+                List<Integer> fixedList = fixPageSequence(rules, pageNumbers);
+
+                // get fixed list mid number and add to running sum
+                runningSum += fixedList.get(fixedList.size() / 2);
+            }
+        }
+
+        return String.valueOf(runningSum);
     }
+
+    private static List<Integer> fixPageSequence(Map<Integer, Set<Integer>> rules, List<Integer> pageSequence) {
+        List<Integer> copy = new ArrayList<>(pageSequence);
+
+        copy.sort((o1, o2) -> {
+            if (o1.equals(o2)) {
+                return 0;
+            } else {
+                if (rules.containsKey(o1) && rules.get(o1).contains(o2)) {
+                    return -1;
+                } else if (rules.containsKey(o2) && rules.get(o2).contains(o1)) {
+                    return 1;
+                }
+            }
+
+            return 0;
+        });
+
+        return copy;
+    }
+
 }
