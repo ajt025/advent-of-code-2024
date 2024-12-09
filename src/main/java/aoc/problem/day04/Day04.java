@@ -24,28 +24,10 @@ public class Day04 implements Day {
         {1, -1},    // top right
         {-1, 1},    // bottom left
     };
-
-    public char[][] buildBoard(String input) {
-        // build the board
-        List<String> lines = Utils.splitLines(input);
-        int m = lines.size();
-        int n = lines.get(0).length();
-
-        char[][] board = new char[m][n];
-
-        for (int i = 0; i < lines.size(); ++i) {
-            String currLine = lines.get(i);
-            for (int j = 0; j < currLine.length(); ++j) {
-                board[i][j] = currLine.charAt(j);
-            }
-        }
-
-        return board;
-    }
     
     @Override
     public String part1(String input) {
-        char[][] board = buildBoard(input);
+        char[][] board = Utils.buildBoard(input);
 
         int runningSum = 0;
         for (int i = 0; i < board.length; ++i) {
@@ -84,7 +66,7 @@ public class Day04 implements Day {
 
     @Override
     public String part2(String input) {
-        char[][] board = buildBoard(input);
+        char[][] board = Utils.buildBoard(input);
 
         int runningSum = 0;
         for (int i = 0; i < board.length; ++i) {

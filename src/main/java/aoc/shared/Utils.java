@@ -26,6 +26,7 @@ public class Utils {
     public static final String DIGIT_REGEX = "\\d+";
     public static final Pattern DIGIT = Pattern.compile(DIGIT_REGEX);
 
+    // Line Methods
     public static List<String> splitLines(String input) {
         return Arrays.asList(input.split(System.lineSeparator()));
     }
@@ -39,6 +40,25 @@ public class Utils {
         }
 
         return results;
+    }
+
+    // Board Methods
+    public static char[][] buildBoard(String input) {
+        // build the board
+        List<String> lines = Utils.splitLines(input);
+        int m = lines.size();
+        int n = lines.get(0).length();
+
+        char[][] board = new char[m][n];
+
+        for (int i = 0; i < lines.size(); ++i) {
+            String currLine = lines.get(i);
+            for (int j = 0; j < currLine.length(); ++j) {
+                board[i][j] = currLine.charAt(j);
+            }
+        }
+
+        return board;
     }
 
 }
