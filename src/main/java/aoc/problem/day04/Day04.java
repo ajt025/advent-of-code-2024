@@ -9,20 +9,20 @@ public class Day04 implements Day {
 
     int[][] DIRECTIONS = {
         {-1, -1},   // top left
-        {0, -1},    // top
-        {1, -1},    // top right
-        {-1, 0},    // left
-        {1, 0},     // right
-        {-1, 1},    // bottom left
-        {0, 1},     // bottom
+        {-1, 0},    // top
+        {-1, 1},    // top right
+        {0, -1},    // left
+        {0, 1},     // right
+        {1, -1},    // bottom left
+        {1, 0},     // bottom
         {1, 1},     // bottom right
     };
 
     int[][] DIAGONAL_DIRECTIONS = {
         {-1, -1},   // top left
         {1, 1},     // bottom right
-        {1, -1},    // top right
-        {-1, 1},    // bottom left
+        {-1, 1},    // top right
+        {1, -1},    // bottom left
     };
     
     @Override
