@@ -61,4 +61,10 @@ public class Utils {
         return board;
     }
 
+    public static void printBoard(char[][] board) {
+        for (char[] line : board) {
+            System.out.println(line);
+        }
+    }
+
 }
