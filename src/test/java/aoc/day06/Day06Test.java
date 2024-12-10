@@ -32,12 +32,21 @@ public class Day06Test {
     @Test
     public void testPart2(){
         // Given
-        String input = "";
+        String input =  "....#.....\n" +
+                        ".........#\n" +
+                        "..........\n" +
+                        "..#.......\n" +
+                        ".......#..\n" +
+                        "..........\n" +
+                        ".#..^.....\n" +
+                        "........#.\n" +
+                        "#.........\n" +
+                        "......#...\n";
 
         // When
         String result = new Day06().part2(input);
 
         // Then
-        assertEquals("not implemented", result);
+        assertEquals("6", result);
     }
 }
