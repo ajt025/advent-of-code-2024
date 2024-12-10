@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -31,15 +32,8 @@ public class Utils {
         return Arrays.asList(input.split(System.lineSeparator()));
     }
 
-    public static List<Integer> parseLineToInts(String input, String separator) {
-        String[] elements = input.split(separator);
-
-        List<Integer> results = new ArrayList<>();
-        for (String item : elements) {
-            results.add(Integer.parseInt(item));
-        }
-
-        return results;
+    public static List<Integer> parseLineToInts(String input) {
+        return DIGIT.matcher(input).results().map((match) -> Integer.parseInt(match.group())).collect(Collectors.toList());
     }
 
     // Board Methods

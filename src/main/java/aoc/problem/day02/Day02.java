@@ -18,7 +18,7 @@ public class Day02 implements Day {
         int safeCount = 0;
 
         for (String line : lines) {
-            List<Integer> levels = Utils.parseLineToInts(line, " ");
+            List<Integer> levels = Utils.parseLineToInts(line);
 
             if (isSafe(levels)) {
                 ++safeCount;
@@ -62,7 +62,7 @@ public class Day02 implements Day {
         int safeCount = 0;
 
         for (String line : lines) {
-            List<Integer> levels = Utils.parseLineToInts(line, " ");
+            List<Integer> levels = Utils.parseLineToInts(line);
 
             // call safe check on normal input and then, if needed, n sublists with each element excluded
             if (isSafe(levels)) {
