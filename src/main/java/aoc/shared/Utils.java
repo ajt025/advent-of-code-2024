@@ -36,6 +36,10 @@ public class Utils {
         return DIGIT.matcher(input).results().map((match) -> Integer.parseInt(match.group())).collect(Collectors.toList());
     }
 
+    public static List<Long> parseLineToLongs(String input) {
+        return DIGIT.matcher(input).results().map((match) -> Long.parseLong(match.group())).collect(Collectors.toList());
+    }
+
     // Board Methods
     public static char[][] buildBoard(String input) {
         // build the board
