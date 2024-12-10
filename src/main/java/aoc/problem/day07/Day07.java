@@ -18,7 +18,7 @@ public class Day07 implements Day {
         for (List<Long> equation : equations) {
             long testValue = equation.get(0);
             if (applyOperations(testValue, 0, equation.subList(1, equation.size()))) {
-                System.out.println(equation + " is valid!");
+                // System.out.println(equation + " is valid!");
                 runningSum += testValue;
             }
         }
@@ -50,7 +50,48 @@ public class Day07 implements Day {
 
     @Override
     public String part2(String input) {
-        return null;
+        List<List<Long>> equations = Utils.splitLines(input).stream()
+                                         .map(Utils::parseLineToLongs)
+                                         .collect(Collectors.toList());
+
+        long runningSum = 0;
+        for (List<Long> equation : equations) {
+            long testValue = equation.get(0);
+            if (applyOperationsWithConcat(testValue, 0, equation.subList(1, equation.size()))) {
+                // System.out.println(equation + " is valid!");
+                runningSum += testValue;
+            }
+        }
+
+        return String.valueOf(runningSum);
     }
-    
+
+    private boolean applyOperationsWithConcat(long target, long currValue, List<Long> operands) {
+        // BASE: no more operations
+        if (operands.size() == 0) {
+            return currValue == target;
+        }
+
+        // OPT: operations only increase value, solution will never exceed target
+        if (currValue > target) {
+            return false;
+        }
+
+        long nextOperand = operands.get(0);
+        List<Long> remainingOperands = operands.subList(1, operands.size());
+        
+        // add op
+        return applyOperationsWithConcat(target, currValue + nextOperand, remainingOperands) ||
+        // multiply op
+                applyOperationsWithConcat(target, currValue == 0 ? nextOperand : // avoid multiplying by 0 for first recursion
+                                                         currValue * nextOperand,
+                                        remainingOperands) ||
+        // concat op
+                applyOperationsWithConcat(target, concat(currValue, nextOperand), remainingOperands);
+    }
+
+    private Long concat(long a, long b) {
+        String combined = String.valueOf(a) + String.valueOf(b);
+        return Long.parseLong(combined);
+    }
 }
