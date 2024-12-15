@@ -27,7 +27,7 @@ public class Day06 implements Day {
         // call recursive function and add counts
         walk(board, startPosition[0], startPosition[1], DIRECTIONS[0]);
 
-        int totalSpacesCovered = countVisited(board);
+        int totalSpacesCovered = Utils.findCountOnBoard(board, VISITED);
 
         return String.valueOf(totalSpacesCovered);
     }
@@ -73,18 +73,6 @@ public class Day06 implements Day {
         }
 
         throw new RuntimeException("Current direction is not a valid direction for problem");
-    }
-
-    private static int countVisited(char[][] board) {
-        int count = 0;
-        for (int i = 0; i < board.length; ++i) {
-            for (int j = 0; j < board[i].length; ++j) {
-                if (board[i][j] == VISITED) {
-                    ++count;
-                }
-            }
-        }
-        return count;
     }
 
     @Override

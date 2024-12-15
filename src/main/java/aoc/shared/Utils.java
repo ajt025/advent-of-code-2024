@@ -59,6 +59,28 @@ public class Utils {
         return board;
     }
 
+    public static char[][] buildBoard(int m, int n, char fill) {
+        char[][] board = new char[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                board[i][j] = fill;
+            }
+        }
+        return board;
+    }
+
+    public static int findCountOnBoard(char[][] board, char target) {
+        int count = 0;
+        for (int i = 0; i < board.length; ++i) {
+            for (int j = 0; j < board[i].length; ++j) {
+                if (board[i][j] == target) {
+                    ++count;
+                }
+            }
+        }
+        return count;
+    }
+
     public static void printBoard(char[][] board) {
         for (char[] line : board) {
             System.out.println(line);
