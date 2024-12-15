@@ -110,7 +110,44 @@ public class Day08 implements Day {
 
     @Override
     public String part2(String input) {
-        // TODO Auto-generated method stub
-        return null;
+        char[][] board = Utils.buildBoard(input);
+        char[][] antinodeBoard = Utils.buildBoard(board.length, board[0].length, BLANK);
+        
+        // get all locations of each antenna Map<AntennaType, Locations>
+        Map<Character, List<List<Integer>>> antennas = parseAntennaPositions(board);
+
+        // per antennatype, calc vector distance between every element
+        for (Character antennaType : antennas.keySet()) {
+            List<List<Integer>> positions = antennas.get(antennaType);
+
+            // each location, add/sub vector distance
+            for (int i = 0; i < positions.size(); i++) {
+                for (int j = i + 1; j < positions.size(); j++) {
+                    List<Integer> distance = calculateVector(positions.get(i), positions.get(j));
+                    generateAntinodesExtra(board, antinodeBoard, antennaType, positions.get(i), distance);
+                }
+            }
+        }
+
+        // Utils.printBoard(antinodeBoard);
+
+        // count all antinodes and return
+        return String.valueOf(Utils.findCountOnBoard(antinodeBoard, ANTINODE));
+    }
+
+    // Only need one source position, travel as far as possible positively and negatively
+    private void generateAntinodesExtra(char[][] antennaBoard, char[][] antinodeBoard, char antennaType,
+                                        List<Integer> antennaPosition, List<Integer> distance) {
+        // add/sub manhattan distance until bounds exceeded
+        for (List<Integer> pole : generatePolars(distance)) {
+
+            List<Integer> currPosition = antennaPosition;
+            while (Utils.isInBounds(antinodeBoard, currPosition.get(0), currPosition.get(1))) {
+                antinodeBoard[currPosition.get(0)][currPosition.get(1)] = ANTINODE;
+
+                List<Integer> potentialAntinode = calculateSum(List.of(currPosition.get(0), currPosition.get(1)), pole);
+                currPosition = potentialAntinode;
+            }
+        }
     }
 }

@@ -69,6 +69,10 @@ public class Utils {
         return board;
     }
 
+    public static boolean isInBounds(char[][] board, int x, int y) {
+        return x >= 0 && y >= 0 && x < board.length && y < board[x].length;
+    }
+
     public static int findCountOnBoard(char[][] board, char target) {
         int count = 0;
         for (int i = 0; i < board.length; ++i) {
